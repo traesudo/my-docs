@@ -16,7 +16,7 @@ type Scopeb func(*gorm.DB) *gorm.DB
 
 func InitDatabase() {
 	dsn := fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=disable TimeZone=Asia/Shanghai",
-		"127.0.0.1",
+		"43.139.104.248",
 		"directus",
 		"directus",
 		"directus",

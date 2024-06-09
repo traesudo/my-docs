@@ -37,3 +37,12 @@ func GetLastPost(query string) ([]Post, error) {
 	}
 	return posts, nil
 }
+
+func GetAnyPosts(query string) ([]Post, error) {
+	var posts []Post
+	err := DB().Model(Post{}).Where("content like ? OR title like ?", "%"+query+"%", "%"+query+"%").Order("p_created_at desc").Find(&posts).Error
+	if err != nil {
+		return posts, nil
+	}
+	return posts, nil
+}

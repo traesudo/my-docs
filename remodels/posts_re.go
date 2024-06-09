@@ -17,3 +17,8 @@ type PostDetailRe struct {
 	UpdatedAt string `json:"updated_at"`
 	Content   string `json:"content"`
 }
+
+type SearchRe struct {
+	ID    string `json:"id"`
+	Title string `json:"title"`
+}
