@@ -6,13 +6,14 @@ import (
 )
 
 type Post struct {
-	ID         string     `gorm:"id" json:"id"`
-	Label      int        `gorm:"label" json:"label"`
-	Title      string     `gorm:"title" json:"title"`
-	Content    string     `gorm:"content" json:"content"`
-	PCreatedAt time.Time  `gorm:"p_created_at" json:"p_created_at"`
-	PUpdatedAt time.Time  `gorm:"p_updated_at" json:"p_updated_at"`
-	PDeletedAt *time.Time `gorm:"p_deleted_at" json:"p_deleted_at"`
+	ID              string     `gorm:"id" json:"id"`
+	Label           int        `gorm:"label" json:"label"`
+	Title           string     `gorm:"title" json:"title"`
+	Content         string     `gorm:"content" json:"content"`
+	ContentMarkdown string     `gorm:"content_markdown" json:"content_markdown"`
+	PCreatedAt      time.Time  `gorm:"p_created_at" json:"p_created_at"`
+	PUpdatedAt      time.Time  `gorm:"p_updated_at" json:"p_updated_at"`
+	PDeletedAt      *time.Time `gorm:"p_deleted_at" json:"p_deleted_at"`
 }
 
 func GetPostById(id string) (*Post, error) {
@@ -40,7 +41,7 @@ func GetLastPost(query string) ([]Post, error) {
 
 func GetAnyPosts(query string) ([]Post, error) {
 	var posts []Post
-	err := DB().Model(Post{}).Where("content like ? OR title like ?", "%"+query+"%", "%"+query+"%").Order("p_created_at desc").Find(&posts).Error
+	err := DB().Model(Post{}).Where("content_markdown like ? OR title like ?", "%"+query+"%", "%"+query+"%").Order("p_created_at desc").Find(&posts).Error
 	if err != nil {
 		return posts, nil
 	}

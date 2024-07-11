@@ -1,23 +1,23 @@
-package api
+package docs
 
 import (
-	"github.com/gin-gonic/gin"
+	"my-docs/api"
 	"my-docs/model"
 )
 
-func GetPosts(c *gin.Context) {
-	query := c.Query("direction")
+func (s *DocsController) GetPosts() {
+	query := s.Query("direction")
 	post, err := model.GetLastPost(query)
 	if err != nil {
-		c.JSON(400, err)
+		s.JSON(400, err)
 	}
 	labels, err := model.GetAllLabel()
 	if err != nil {
-		c.JSON(400, err)
+		s.JSON(400, err)
 	}
-	processor := NewBuildProcessor()
+	processor := api.NewBuildProcessor()
 	resp := processor.BuildPostsRe(post, labels)
 	re := make(map[string]interface{})
 	re["data"] = resp
-	c.JSON(200, re)
+	s.JSON(200, re)
 }

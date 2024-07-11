@@ -1,16 +1,15 @@
-package api
+package docs
 
 import (
-	"github.com/gin-gonic/gin"
 	"my-docs/model"
 )
 
-func GetLives(c *gin.Context) {
+func (s *DocsController) GetLives() {
 	resp, err := model.GetAllLive()
 	if err != nil {
-		c.JSON(400, err)
+		s.JSON(400, err)
 	}
 	re := make(map[string]interface{})
 	re["data"] = resp
-	c.JSON(200, re)
+	s.JSON(200, re)
 }
