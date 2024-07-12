@@ -19,7 +19,7 @@ func main() {
 	indexApi.GET("post/:id", controller.Handler(docRunner.GetPost))
 	indexApi.GET("directions", controller.Handler(docRunner.GetDirections))
 	indexApi.GET("search", controller.Handler(docRunner.GlobalSearch))
-	indexApi.GET("lives", controller.Handler(docRunner.GlobalSearch))
+	indexApi.GET("lives", controller.Handler(docRunner.GetLives))
 	userApi := r.Group("user")
 	//  缺少依赖注入
 	useRunner := users.UserController{controller}
