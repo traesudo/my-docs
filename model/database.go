@@ -7,6 +7,7 @@ import (
 	"gorm.io/gorm/logger"
 	"log"
 	"moul.io/zapgorm2"
+	"my-docs/config"
 )
 import "gorm.io/driver/postgres"
 
@@ -16,12 +17,11 @@ type Scopeb func(*gorm.DB) *gorm.DB
 
 func InitDatabase() {
 	dsn := fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=disable TimeZone=Asia/Shanghai",
-		"43.139.104.248",
-		"directus",
-		"directus",
-		"directus",
-		"5432",
-	)
+		config.Env.Database.Host,
+		config.Env.Database.Username,
+		config.Env.Database.Password,
+		config.Env.Database.DBName,
+		config.Env.Database.Port)
 	zl, _ := zap.NewDevelopment()
 	l := zapgorm2.New(zl)
 	l.SetAsDefault()
